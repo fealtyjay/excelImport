@@ -20,7 +20,7 @@ public class ReadExcel {
 //        EasyExcel.read(fileName,)
         File file =new File(fileNamePath);
         String fileName = file.getName().replaceAll(".XLS","");
-        System.out.print(fileName);
+        System.out.print("--"+fileName);
         ReadSheet sheet  = new ReadSheet() ;
         sheet.setSheetName(sheetName);
         sheet.setHeadRowNumber(4);
@@ -30,11 +30,11 @@ public class ReadExcel {
              os = new FileOutputStream("output.sql");
              pw=new PrintWriter(os);
             List<LinkedHashMap<String,String>> res = EasyExcel.read(new FileInputStream(file)).sheet(sheetName).doReadSync();
-            System.out.println(res.toString());
+            System.out.println("--"+res.toString());
             String str ="";
             for(int i=5;i<=11;i++){
                 LinkedHashMap<String,String> rows6 = res.get(i);
-                str="insert into Z01(Z01ID,AGENCY_CODE,ROWNUM,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
+                str="INSERT INTO Z01(Z01ID,AGENCY_CODE,ROWNUMS,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
                         UUID.randomUUID().toString().replaceAll("-","") + "','"+fileName+"','" +rows6.get(1)+"',"+
                         "'2018','12','"+rows6.get(0)+"','收入','"+rows6.get(2)+"','"+rows6.get(3)+"','"+rows6.get(4)+"'"+
                         ");";
@@ -43,13 +43,13 @@ public class ReadExcel {
         }
             for(int j=5;j<=27;j++){
                 LinkedHashMap<String,String> rows6 = res.get(j);
-                str="insert into Z01(Z01ID,AGENCY_CODE,ROWNUM,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
+                str="INSERT INTO Z01(Z01ID,AGENCY_CODE,ROWNUMS,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
                         UUID.randomUUID().toString().replaceAll("-","") + "','"+fileName+"','" +rows6.get(6)+"',"+
                         "'2018','12','"+rows6.get(5)+"','支出','"+getValue(rows6.get(7))+"','"+getValue(rows6.get(8))+"','"+getValue(rows6.get(9))+"'"+
                         ");";
                 pw.println(str);
                 System.out.println(str);
-                str="insert into Z01(Z01ID,AGENCY_CODE,ROWNUM,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
+                str="INSERT INTO Z01(Z01ID,AGENCY_CODE,ROWNUMS,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
                         UUID.randomUUID().toString().replaceAll("-","") + "','"+fileName+"','" +rows6.get(11)+"',"+
                         "'2018','12','"+rows6.get(10)+"','支出','"+getValue(rows6.get(12))+"','"+getValue(rows6.get(13))+"','"+getValue(rows6.get(14))+"'"+
                         ");";

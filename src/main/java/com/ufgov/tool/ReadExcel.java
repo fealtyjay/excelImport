@@ -1,6 +1,7 @@
 package com.ufgov.tool;
 
 import com.ufgov.tool.impl.Z01Sheet;
+import com.ufgov.tool.impl.Z12Sheet;
 import com.ufgov.tool.itf.SheetPrototype;
 
 import java.util.HashSet;
@@ -88,6 +89,8 @@ public class ReadExcel {
         Set<SheetPrototype>  sheetPrototypes = new HashSet<SheetPrototype>();
         Z01Sheet z01sheet  = new Z01Sheet("Z01 收入支出决算总表(财决01表)",5,23);
         sheetPrototypes.add(z01sheet);
+        Z12Sheet z12Sheet  = new Z12Sheet("Z12 资产负债简表(财决12表)",5,23);
+        sheetPrototypes.add(z12Sheet);
         return sheetPrototypes;
     }
 

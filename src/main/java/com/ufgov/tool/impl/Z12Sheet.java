@@ -12,16 +12,10 @@ import java.util.UUID;
 
 /**
  * @Author:zeus
- * @Date:2019/11/23 15:48
+ * @Date:2019/11/25 11:51
  * @主要功能:
  **/
-public class Z01Sheet implements SheetPrototype {
-
-    public Z01Sheet(String sheetName, int beginRowNum, int endRowNum) {
-        this.sheetName = sheetName;
-        this.beginRowNum = beginRowNum;
-        this.endRowNum = endRowNum;
-    }
+public class Z12Sheet  implements SheetPrototype {
 
     private  String sheetName;
 
@@ -29,12 +23,17 @@ public class Z01Sheet implements SheetPrototype {
 
     private   int   endRowNum;
 
+    public Z12Sheet(String sheetName, int beginRowNum, int endRowNum) {
+        this.sheetName = sheetName;
+        this.beginRowNum = beginRowNum;
+        this.endRowNum = endRowNum;
+    }
     public int getBeginRowNum() {
-        return this.beginRowNum;
+        return 0;
     }
 
     public int getEndRowNum() {
-        return this.endRowNum;
+        return 0;
     }
 
     public void exeRead(String dir) {
@@ -42,7 +41,7 @@ public class Z01Sheet implements SheetPrototype {
         if(file.isDirectory()){
             File[]   allelxs = file.listFiles();
             for (File xls:allelxs
-                 ) {
+            ) {
 //                String fileNamePath ="C:\\Users\\zeus\\Documents\\WeChat Files\\fealtyjay\\FileStorage\\File\\2019-11\\读取exel插入数据库\\正式数据文件举例\\中华人民共和国外交部.XLS";
 //        EasyExcel.read(fileName,)
 //                File file =new File(fileNamePath);
@@ -65,7 +64,7 @@ public class Z01Sheet implements SheetPrototype {
                     String str ="";
                     for(int i=5;i<=11;i++){
                         LinkedHashMap<String,String> rows6 = res.get(i);
-                        str="INSERT INTO Z01(Z01ID,AGENCY_CODE,ROWNUMS,SET_YEAR,SET_MONTH,XM,AMTTYPE,AMT0,AMT1,AMT2) values ('" +
+                        str="INSERT INTO Z12(Z12ID,AGENCY_CODE,ROWNUMS,SET_YEAR,SET_MONTH,NAME,CODETYPE,AMT0,AMT1) values ('" +
                                 UUID.randomUUID().toString().replaceAll("-","") + "','"+fileName+"','" +rows6.get(1)+"',"+
                                 "'2018','12','"+rows6.get(0)+"','收入','"+rows6.get(2)+"','"+rows6.get(3)+"','"+rows6.get(4)+"'"+
                                 ");";
@@ -105,14 +104,14 @@ public class Z01Sheet implements SheetPrototype {
             }
         }
 
-    }
 
+    }
 
     public String getSheetName() {
-        return null;
+        return this.sheetName;
     }
 
-       private static String getValue(String str){
+    private static String getValue(String str){
         if(str==null)
             return "0.0";
         return str.equals("—") ? "0.0":str;
